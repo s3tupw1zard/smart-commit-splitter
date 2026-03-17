@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgb(10,32,64)"/>
+      <stop offset="100%" stop-color="rgb(0,122,204)"/>
+    </linearGradient>
+    <clipPath id="clip">
+      <rect x="0" y="0" width="1024" height="1024" rx="180" ry="180"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#clip)">
+    <rect x="0" y="0" width="1024" height="1024" fill="url(#bg)"/>
+    <g fill="none" stroke="white" stroke-width="96" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M512 760 L512 530"/>
+      <path d="M512 530 L360 285"/>
+      <path d="M512 530 L664 285"/>
+    </g>
+    <g fill="white">
+      <circle cx="512" cy="760" r="96"/>
+      <circle cx="360" cy="285" r="96"/>
+      <circle cx="664" cy="285" r="96"/>
+    </g>
+    <g stroke="rgba(3,18,35,0.86)" stroke-width="26" stroke-linecap="round">
+      <line x1="512" y1="405" x2="512" y2="635"/>
+    </g>
+    <polygon points="700,280 732,338 790,370 732,402 700,460 668,402 610,370 668,338" fill="rgb(98,229,255)"/>
+  </g>
+</svg>
