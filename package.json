@@ -1,0 +1,211 @@
+{
+  "name": "smart-commit-splitter",
+  "displayName": "Smart Commit Splitter",
+  "description": "🤖 Intelligently split your Git changes into logical commits using AI. Analyze hunks, file operations, and generate conventional commit messages automatically. Supports multiple languages and AI models.",
+  "version": "1.2.0",
+  "publisher": "s3tupw1zard",
+  "author": {
+    "name": "s3tupw1zard",
+    "email": "setupwizard@proton.me"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/s3tupw1zard/smart-commit-splitter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/s3tupw1zard/smart-commit-splitter/issues"
+  },
+  "homepage": "https://github.com/s3tupw1zard/smart-commit-splitter#readme",
+  "keywords": [
+    "git",
+    "commit",
+    "ai",
+    "automation",
+    "conventional-commits",
+    "productivity",
+    "developer-tools",
+    "source-control",
+    "workflow"
+  ],
+  "galleryBanner": {
+    "color": "#2d2d30",
+    "theme": "dark"
+  },
+  "badges": [
+    {
+      "url": "https://img.shields.io/badge/AI-Powered-blue",
+      "href": "https://github.com/s3tupw1zard/smart-commit-splitter",
+      "description": "AI-Powered Git Commit Splitting"
+    },
+    {
+      "url": "https://img.shields.io/badge/i18n-Ready-green",
+      "href": "https://github.com/s3tupw1zard/smart-commit-splitter",
+      "description": "Multi-language Support"
+    }
+  ],
+  "icon": "icon.png",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "SCM Providers",
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onCommand:smartCommitSplitter.selectModel",
+    "onCommand:smartCommitSplitter.splitAndCommit",
+    "onView:smartCommitSplitterView"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "smartCommitSplitter.selectModel",
+        "title": "Smart Commit Splitter: Select Model",
+        "icon": "$(gear)"
+      },
+      {
+        "command": "smartCommitSplitter.splitAndCommit",
+        "title": "Smart Commit Splitter: Split and Commit",
+        "icon": "$(git-branch)"
+      },
+      {
+        "command": "smartCommitSplitter.openPanel",
+        "title": "Open Smart Commit Splitter Panel",
+        "icon": "$(rocket)"
+      },
+      {
+        "command": "smartCommitSplitter.refreshPanel",
+        "title": "Refresh",
+        "icon": "$(refresh)"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "smartCommitSplitter",
+          "title": "Smart Commit Splitter",
+          "icon": "$(rocket)"
+        }
+      ]
+    },
+    "views": {
+      "smartCommitSplitter": [
+        {
+          "icon": "icon.png",
+          "type": "webview",
+          "id": "smartCommitSplitterView",
+          "name": "Git Manager",
+          "when": "workspaceFolderCount > 0"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Smart Commit Splitter",
+      "properties": {
+        "smartCommitSplitter.autoApply": {
+          "type": "boolean",
+          "default": false,
+          "description": "Auto apply generated commit plan"
+        },
+        "smartCommitSplitter.includeUntracked": {
+          "type": "boolean",
+          "default": true,
+          "description": "Include untracked files"
+        },
+        "smartCommitSplitter.baseUrl": {
+          "type": "string",
+          "default": "https://api.openai.com/v1",
+          "description": "Base URL of an OpenAI-compatible API, for example https://api.openai.com/v1 or https://openrouter.ai/api/v1"
+        },
+        "smartCommitSplitter.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "API key for the OpenAI-compatible provider"
+        },
+        "smartCommitSplitter.model": {
+          "type": "string",
+          "default": "gpt-4o-mini",
+          "description": "Model name, for example gpt-4o-mini or openai/gpt-4o-mini on OpenRouter"
+        },
+        "smartCommitSplitter.appUrl": {
+          "type": "string",
+          "default": "",
+          "description": "Optional app URL for providers like OpenRouter, sent as HTTP-Referer"
+        },
+        "smartCommitSplitter.appName": {
+          "type": "string",
+          "default": "Smart Commit Splitter",
+          "description": "Optional app name for providers like OpenRouter"
+        },
+        "smartCommitSplitter.openRouterModelListUrl": {
+          "type": "string",
+          "default": "https://raw.githubusercontent.com/s3tupw1zard/openrouter-model-json/main/openrouter-programming-48.json",
+          "markdownDescription": "URL to a hosted JSON file containing curated OpenRouter models for the model picker. Used only when baseUrl points to OpenRouter."
+        },
+        "smartCommitSplitter.openRouterSelectedSource": {
+          "type": "string",
+          "default": "programming-free",
+          "markdownDescription": "The key used to store the user's selected model source for OpenRouter in the global state. This allows the extension to remember the user's choice between sessions."
+        },
+        "smartCommitSplitter.openRouterCustomModelListUrl": {
+          "type": "string",
+          "default": "https://raw.githubusercontent.com/s3tupw1zard/openrouter-model-json/refs/heads/main/output/budget.json",
+          "markdownDescription": "URL to a hosted JSON file containing curated OpenRouter models for the model picker. Used only when baseUrl points to OpenRouter."
+        }
+      }
+    },
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "smartCommitSplitter.selectModel"
+        },
+        {
+          "command": "smartCommitSplitter.splitAndCommit"
+        },
+        {
+          "command": "smartCommitSplitter.openPanel"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "smartCommitSplitter.refreshPanel",
+          "when": "view == smartCommitSplitterView",
+          "group": "navigation"
+        }
+      ],
+      "scm/title": [
+        {
+          "command": "smartCommitSplitter.selectModel",
+          "when": "scmProvider == git",
+          "group": "navigation@1"
+        },
+        {
+          "command": "smartCommitSplitter.splitAndCommit",
+          "when": "scmProvider == git",
+          "group": "navigation@2"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.90.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "typescript-eslint": "^8.52.0",
+    "eslint": "^9.39.2",
+    "typescript": "^5.9.3",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2"
+  }
+}
