@@ -1,3 +1,20 @@
+# NOTICE
+
+This VS Code extension is far from what it should be. Currently, commits are created file-based. I want a completely different approach.
+
+My priority for now was to get the extension ready to communicate directly with the AI ​​APIs instead of using the VSCode integrated language model settings, which are currently only available in the Insiders version.
+
+Basically, I don't want a file-based approach, but a reconstructive one. AI should take the written source code and logically reconstruct the changes, determining the most likely order in which they were made. Then, using hunks, each change or addition should be added sequentially. This way, with many individual changes, as many consecutive commits as needed would be generated, instead of all changes at once.
+
+For example, changes in two files would ultimately be merged into a single commit if they belong together or are related. Similarly, if a single file contains many unrelated changes, the changes would be split into multiple commits with appropriate messages.
+
+
+Currently, this extension doesn't quite do what the name Smart Commit Splitter suggests.
+
+However, I would appreciate it if you would star my repository in the meantime.
+
+So stay tuned for some updates on this extension!
+
 # Smart Commit Splitter
 
 Smart Commit Splitter helps you turn a messy working tree into clean, reviewable Git commits without leaving VS Code. It analyzes your current changes, suggests a commit plan, and lets you review it before anything gets written.
